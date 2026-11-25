@@ -1,0 +1,597 @@
+@import "tailwindcss";
+
+/*
+  DM Empresarial · Ecossistema de vendas
+  Tipografia: Manrope (500–800). Paleta: azuis vivos sobre branco gelo.
+  O azul profundo aparece só em áreas pontuais de contraste.
+*/
+@theme {
+  --font-sans: "Manrope Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Manrope Variable", ui-sans-serif, system-ui, sans-serif;
+
+  --color-electric: #2563ff;
+  --color-electric-600: #1a4fe0;
+  --color-vibrant: #008cff;
+  --color-cyan: #04d5e8;
+  --color-ice: #f7faff;
+  --color-ink: #0c2555;
+
+  /* famílias legadas remapeadas para a nova paleta */
+  --color-navy-950: #071a3d;
+  --color-navy-900: #0c2555;
+  --color-navy-800: #16336d;
+  --color-navy-700: #1f4185;
+  --color-navy-600: #2a4f9a;
+  --color-brand-700: #1a4fe0;
+  --color-brand-600: #2563ff;
+  --color-brand-500: #3b7bff;
+  --color-brand-400: #7aa6ff;
+  --color-brand-100: #e8efff;
+  --color-teal-700: #00718a;
+  --color-teal-600: #0094b3;
+  --color-teal-500: #00bcd6;
+  --color-teal-400: #04d5e8;
+  --color-teal-300: #7deaf4;
+  --color-teal-50: #e6fbfd;
+  --color-mist: #eef3fb;
+  --color-paper: #f7faff;
+  --color-line: #dde6f3;
+
+  --animate-rise: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply bg-white font-sans text-ink antialiased;
+    text-rendering: optimizeLegibility;
+    font-weight: 500;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display;
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  section[id] {
+    scroll-margin-top: 132px;
+  }
+  @media (min-width: 1024px) {
+    section[id] {
+      scroll-margin-top: 84px;
+    }
+  }
+  ::selection {
+    background: var(--color-cyan);
+    color: var(--color-ink);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-electric);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+}
+
+@layer utilities {
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, rgb(255 255 255 / 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(255 255 255 / 0.06) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+  .bg-grid-light {
+    background-image:
+      linear-gradient(to right, rgb(37 99 255 / 0.07) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(37 99 255 / 0.07) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+  .display {
+    font-weight: 800;
+    letter-spacing: -0.045em;
+    line-height: 0.98;
+  }
+  .h-section {
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    line-height: 1.02;
+  }
+}
+
+/* ───────── Texto: revelação por máscara (CSS — roda sem JavaScript) ───────── */
+.mword {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+.mword > span {
+  display: inline-block;
+  animation: mword-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes mword-up {
+  from {
+    transform: translateY(105%);
+  }
+}
+
+/* Entradas da primeira dobra */
+@keyframes drop-in {
+  from {
+    opacity: 0;
+    transform: translateY(-14px);
+  }
+}
+.drop-in {
+  animation: drop-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ───────── Revelação ao rolar ─────────
+   Só esconde quando o observador já está ativo (html.reveal-ready,
+   aplicado por src/lib/reveal-script.ts). Sem JavaScript, tudo aparece. */
+.reveal-ready [data-reveal] {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--d, 0ms);
+}
+.reveal-ready [data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+}
+.reveal-ready [data-reveal="mask"] {
+  opacity: 1;
+  clip-path: inset(0 0 100% 0);
+  transform: translateY(28px);
+  transition:
+    clip-path 1s cubic-bezier(0.65, 0, 0.35, 1),
+    transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--d, 0ms);
+}
+.reveal-ready [data-reveal="mask"].is-in {
+  clip-path: inset(-10% -10% -20% -10%);
+  transform: none;
+}
+.reveal-ready [data-reveal="scale"] {
+  transform: scale(0.94) translateY(20px);
+}
+.reveal-ready [data-reveal="scale"].is-in {
+  transform: none;
+}
+.reveal-ready [data-reveal] .stagger > * {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal-ready [data-reveal].is-in .stagger > * {
+  opacity: 1;
+  transform: none;
+}
+.reveal-ready [data-reveal].is-in .stagger > *:nth-child(2) { transition-delay: 0.08s; }
+.reveal-ready [data-reveal].is-in .stagger > *:nth-child(3) { transition-delay: 0.16s; }
+.reveal-ready [data-reveal].is-in .stagger > *:nth-child(4) { transition-delay: 0.24s; }
+.reveal-ready [data-reveal].is-in .stagger > *:nth-child(5) { transition-delay: 0.32s; }
+.reveal-ready [data-reveal].is-in .stagger > *:nth-child(6) { transition-delay: 0.4s; }
+.reveal-ready [data-reveal].is-in .stagger > *:nth-child(7) { transition-delay: 0.48s; }
+.reveal-ready [data-reveal].is-in .stagger > *:nth-child(8) { transition-delay: 0.56s; }
+
+/* barras que crescem quando o bloco aparece */
+.reveal-ready [data-reveal] .grow {
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1.1s cubic-bezier(0.22, 1, 0.36, 1) var(--gd, 0.2s);
+}
+.reveal-ready [data-reveal].is-in .grow {
+  transform: none;
+}
+.reveal-ready [data-reveal] .grow-y {
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1) var(--gd, 0.2s);
+}
+.reveal-ready [data-reveal].is-in .grow-y {
+  transform: none;
+}
+
+/* carrossel de segmentos: os cartões deslizam para dentro ao chegar na tela */
+.reveal-ready [data-reveal="slide"] {
+  opacity: 1;
+  transform: none;
+  clip-path: none;
+}
+.reveal-ready [data-reveal="slide"] .seg-card {
+  opacity: 0;
+  transform: translateX(90px) rotateY(-12deg);
+  transition:
+    opacity 0.7s ease,
+    transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: calc(var(--i, 0) * 80ms);
+}
+.reveal-ready [data-reveal="slide"].is-in .seg-card {
+  opacity: 1;
+  transform: none;
+}
+.seg-card {
+  perspective: 900px;
+}
+.seg-face {
+  transition:
+    background-color 0.55s ease,
+    color 0.55s ease,
+    box-shadow 0.55s ease,
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.seg-face.is-on {
+  transform: translateY(-4px);
+}
+/* brilho que atravessa o cartão quando ele recebe o destaque */
+.seg-shine {
+  background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.35) 50%, transparent 70%);
+  transform: translateX(-120%);
+}
+.seg-face.is-on .seg-shine {
+  animation: seg-shine 0.9s ease-out;
+}
+@keyframes seg-shine {
+  to {
+    transform: translateX(120%);
+  }
+}
+
+/* ───────── Hero: órbita de canais ───────── */
+@property --spin {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0deg;
+}
+.orbit-scene {
+  --mx: 0;
+  --my: 0;
+  /* celular: órbita quase redonda */
+  --rx: 44cqw;
+  --ry: 47cqw;
+  --tile: 13cqw;
+  perspective: 1400px;
+}
+@media (min-width: 640px) {
+  .orbit-scene {
+    --rx: 41cqw;
+    --ry: 38cqw;
+    --tile: 15cqw;
+  }
+}
+.orbit-ring {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: calc(var(--rx) * 2 * var(--k, 1));
+  height: calc(var(--ry) * 2 * var(--k, 1));
+  translate: -50% -50%;
+}
+.orbit-ring-main {
+  border-radius: 50%;
+  padding: 1.5px;
+  background: linear-gradient(135deg, rgba(37, 99, 255, 0.6), rgba(4, 213, 232, 0.6));
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+.orbit-spin-fast {
+  animation: orbit-spin 9s linear infinite;
+}
+.orbit-dot {
+  --t: calc(var(--a) + var(--spin));
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  margin: -4px 0 0 -4px;
+  border-radius: 9999px;
+  background: #04d5e8;
+  box-shadow: 0 0 0 4px rgba(4, 213, 232, 0.2), 0 0 14px rgba(4, 213, 232, 0.9);
+  transform: translate(calc(cos(var(--t)) * var(--rx)), calc(sin(var(--t)) * var(--ry)));
+}
+.orbit-tilt {
+  transform: rotateX(calc(var(--my) * -5deg)) rotateY(calc(var(--mx) * 7deg));
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.orbit-spin {
+  animation: orbit-spin 60s linear infinite;
+}
+@keyframes orbit-spin {
+  to {
+    --spin: 360deg;
+  }
+}
+.orbit-tile {
+  --t: calc(var(--a) + var(--spin));
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--tile, 15cqw);
+  height: var(--tile, 15cqw);
+  max-width: 92px;
+  max-height: 92px;
+  translate: -50% -50%;
+  /* metade de baixo da órbita passa na frente do cartão; a de cima, atrás */
+  z-index: calc(5 + sin(var(--t)) * 2.4);
+  transform: translate(calc(cos(var(--t)) * var(--rx)), calc(sin(var(--t)) * var(--ry)))
+    scale(calc(0.9 + 0.12 * sin(var(--t))));
+}
+.orbit-card {
+  transform: translate3d(calc(var(--mx) * -6px), calc(var(--my) * -6px), 0);
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes check-pop {
+  from {
+    transform: scale(0);
+  }
+  60% {
+    transform: scale(1.25);
+  }
+}
+.check-pop {
+  animation: check-pop 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes toast-cycle {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  5%,
+  30% {
+    opacity: 1;
+    transform: none;
+  }
+  35%,
+  100% {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+.toast-cycle {
+  animation: toast-cycle 9s ease-in-out infinite both;
+}
+
+/* ───────── Cena 3D do hero ───────── */
+.scene {
+  perspective: 1600px;
+  perspective-origin: 50% 30%;
+}
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+@keyframes bob {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -10px, 0);
+  }
+}
+.bob {
+  animation: bob 6s ease-in-out infinite;
+}
+.bob-slow {
+  animation: bob 8s ease-in-out infinite;
+}
+@keyframes scene-in {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.94);
+  }
+}
+.scene-in {
+  animation: scene-in 1.2s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+/* caminhos de luz: desenham-se na entrada e depois recebem pulsos */
+.path-draw {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: path-draw 1.4s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+@keyframes path-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.pulse-dot {
+  offset-rotate: 0deg;
+  animation: along 3.2s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  opacity: 0;
+}
+@keyframes along {
+  0% {
+    offset-distance: 0%;
+    opacity: 0;
+  }
+  12%,
+  85% {
+    opacity: 1;
+  }
+  100% {
+    offset-distance: 100%;
+    opacity: 0;
+  }
+}
+
+/* Caixa 3D (CSS) */
+.box {
+  position: absolute;
+  transform-style: preserve-3d;
+}
+.box > i {
+  position: absolute;
+  display: block;
+  backface-visibility: hidden;
+}
+
+/* ───────── Serviços: narrativa com painel fixo ─────────
+   Sem JavaScript: cada etapa mostra seu próprio visual (em linha).
+   Com JavaScript no desktop: painel fixo troca conforme a rolagem. */
+@media (min-width: 1024px) {
+  .js .step-inline {
+    display: none;
+  }
+  html:not(.js) .step-sticky {
+    display: none !important;
+  }
+  .js .js-dim {
+    opacity: 0.94;
+  }
+  .js .js-dim h3,
+  .js .js-dim p {
+    color: #475569;
+  }
+}
+.vis .vis-pop,
+.vis .vis-list > *,
+.vis .vis-bar,
+.vis .vis-col,
+.vis .vis-flow {
+  transition:
+    opacity 0.6s ease,
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.vis .vis-bar {
+  transform-origin: left;
+}
+.vis .vis-col {
+  transform-origin: bottom;
+}
+.js .vis:not(.is-on) .vis-pop {
+  opacity: 0;
+  transform: translateX(24px) scale(0.97);
+}
+.js .vis:not(.is-on) .vis-list > * {
+  opacity: 0;
+  transform: translateY(10px);
+}
+.js .vis:not(.is-on) .vis-bar {
+  transform: scaleX(0);
+}
+.js .vis:not(.is-on) .vis-col {
+  transform: scaleY(0);
+}
+.js .vis:not(.is-on) .vis-flow {
+  transform: scale(0.6);
+  opacity: 0;
+}
+.vis.is-on .vis-pop { transition-delay: 0.35s; }
+.vis.is-on .vis-flow { transition-delay: 0.15s; }
+.vis.is-on .vis-list > *:nth-child(2) { transition-delay: 0.1s; }
+.vis.is-on .vis-list > *:nth-child(3) { transition-delay: 0.2s; }
+.vis.is-on .vis-list > *:nth-child(4) { transition-delay: 0.3s; }
+.vis.is-on .vis-bar { transition-delay: 0.35s; }
+
+/* ───────── Responsabilidades: o pedido atravessa ───────── */
+@keyframes handoff {
+  0% {
+    left: 0%;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+  12% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+}
+.handoff {
+  animation: handoff 3.6s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+/* pacotes de dados nas conexões do Bling */
+.packet {
+  offset-rotate: 0deg;
+  animation-name: along;
+  animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1);
+  animation-iteration-count: infinite;
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .mword > span,
+  .drop-in,
+  .scene-in,
+  .bob,
+  .bob-slow {
+    animation: none !important;
+  }
+  .path-draw {
+    animation: none !important;
+    stroke-dashoffset: 0;
+  }
+  .orbit-spin,
+  .orbit-spin-fast,
+  .check-pop,
+  .toast-cycle {
+    animation: none !important;
+  }
+  .toast-cycle.absolute {
+    display: none !important;
+  }
+  .pulse-dot,
+  .pulse-dot-group,
+  .packet,
+  .handoff {
+    display: none !important;
+  }
+  .reveal-ready [data-reveal],
+  .reveal-ready [data-reveal] .stagger > *,
+  .reveal-ready [data-reveal] .grow,
+  .reveal-ready [data-reveal] .grow-y,
+  .reveal-ready [data-reveal="slide"] .seg-card {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+  }
+}
