@@ -67,7 +67,7 @@ Variáveis `NEXT_PUBLIC_*` são aplicadas no build: depois de alterar, faça Red
 ## Logos dos marketplaces
 
 Os arquivos em `public/marketplaces/` são as marcas oficiais em SVG (Mercado Livre — símbolo do aperto de mãos;
-Shopee; TikTok; iFood). Se a DM receber os kits de marca oficiais dos parceiros (ex.: o selo específico "TikTok Shop"),
+Shopee; TikTok). Se a DM receber os kits de marca oficiais dos parceiros (ex.: o selo específico "TikTok Shop"),
 basta substituir o arquivo mantendo o mesmo nome.
 
 ## Rodar localmente (opcional)

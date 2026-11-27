@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-export type MarketplaceId = "mercado-livre" | "shopee" | "amazon" | "magalu" | "tiktok-shop" | "ifood";
+export type MarketplaceId = "mercado-livre" | "shopee" | "amazon" | "magalu" | "tiktok-shop";
 
 export const marketplaces: {
   id: MarketplaceId;
@@ -15,7 +15,6 @@ export const marketplaces: {
   { id: "amazon", name: "Amazon", file: "/marketplaces/amazon.png", color: "#FF9900", w: 480, h: 155 },
   { id: "magalu", name: "Magalu", file: "/marketplaces/magalu.png", color: "#0086FF", w: 480, h: 138 },
   { id: "tiktok-shop", name: "TikTok Shop", file: "/marketplaces/tiktok.svg", color: "#FE2C55", w: 352, h: 399 },
-  { id: "ifood", name: "iFood", file: "/marketplaces/ifood.svg", color: "#EA1D2C", w: 24, h: 24 },
 ];
 
 export function MarketplaceLogo({ id, className = "size-full" }: { id: MarketplaceId; className?: string }) {

@@ -34,7 +34,6 @@ const lines: Record<string, string> = {
   amazon: "Catálogo bem estruturado, preços competitivos e atenção às regras do canal.",
   magalu: "Cadastro completo e participação nas campanhas do canal para alcançar novos compradores.",
   "tiktok-shop": "Produtos, vídeos, campanhas e oportunidades no comércio por conteúdo.",
-  ifood: "Estratégias comerciais para ampliar vendas e recorrência.",
 };
 
 const segments = [
@@ -55,8 +54,8 @@ const segments = [
   { icon: Cpu, t: "Produtos técnicos e industriais", d: "Fichas técnicas completas para compras com critério." },
   { icon: NotebookPen, t: "Papelaria e escritório", d: "Variedade de itens organizada por categoria." },
   { icon: Sprout, t: "Agro e jardinagem", d: "Produtos do campo e do jardim em novos canais." },
-  { icon: UtensilsCrossed, t: "Restaurantes e delivery", d: "Cardápio organizado e campanhas no iFood para buscar mais pedidos e recorrência." },
-  { icon: ShoppingBasket, t: "Mercados e conveniência", d: "Pedidos de proximidade com o iFood." },
+  { icon: UtensilsCrossed, t: "Restaurantes e delivery", d: "Produtos da casa (molhos, kits, congelados) vendidos para todo o Brasil." },
+  { icon: ShoppingBasket, t: "Mercados e conveniência", d: "Mix de mercearia e conveniência em novos canais de venda." },
   { icon: Boxes, t: "Outros segmentos", d: "Qualquer empresa com estoque próprio e potencial digital." },
 ];
 
@@ -168,14 +167,14 @@ export function Marketplaces() {
           </svg>
         </div>
 
-        <div className="mt-10 grid grid-cols-2 gap-3 sm:gap-5 lg:mt-0 lg:grid-cols-3">
+        <div className="mt-10 grid grid-cols-2 gap-3 sm:gap-5 lg:mt-0 lg:grid-cols-6">
           {marketplaces.map((m, i) => (
             <Reveal
               key={m.id}
               variant="scale"
               delay={0.08 * i}
               as="article"
-              className="group relative flex flex-col rounded-[24px] bg-white p-4 shadow-[0_20px_50px_-34px_rgba(12,37,85,0.5)] ring-1 ring-line transition-[box-shadow,transform] duration-500 hover:-translate-y-1.5 hover:shadow-[0_30px_60px_-30px_rgba(37,99,255,0.45)] sm:p-7"
+              className={`${i === marketplaces.length - 1 && marketplaces.length % 2 ? "col-span-2" : ""} lg:col-span-2 ${i === 3 && marketplaces.length === 5 ? "lg:col-start-2" : ""} group relative flex flex-col rounded-[24px] bg-white p-4 shadow-[0_20px_50px_-34px_rgba(12,37,85,0.5)] ring-1 ring-line transition-[box-shadow,transform] duration-500 hover:-translate-y-1.5 hover:shadow-[0_30px_60px_-30px_rgba(37,99,255,0.45)] sm:p-7`}
               style={{ ["--brand" as string]: m.color } as CSSProperties}
             >
               <span

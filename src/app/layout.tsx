@@ -19,7 +19,6 @@ export const metadata: Metadata = {
     "Amazon",
     "Magalu",
     "TikTok Shop",
-    "iFood",
     "integração Bling",
     "vender online",
     "DM Empresarial",

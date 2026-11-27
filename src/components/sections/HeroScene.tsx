@@ -6,7 +6,7 @@ import { BlingLogo, MarketplaceLogo, marketplaces } from "@/components/ui/Market
 
 /*
   Cena do hero — "Ecossistema de vendas"
-  Um estoque central (cartão) publicado em seis canais que orbitam ao redor.
+  Um estoque central (cartão) publicado em cinco canais que orbitam ao redor.
   Tudo em CSS (órbita com @property + cos/sin), sem dependências pesadas.
   Sem JavaScript, a cena continua completa; o JS só adiciona parallax.
 */
@@ -67,7 +67,7 @@ export function HeroScene() {
         ref={root}
         className="orbit-scene relative aspect-[1/1.08] w-full [container-type:inline-size] sm:aspect-square"
         role="img"
-        aria-label="Ilustração: um estoque central publicado e sincronizado com Mercado Livre, Shopee, Amazon, Magalu, TikTok Shop e iFood, com os pedidos chegando ao Bling."
+        aria-label="Ilustração: um estoque central publicado e sincronizado com Mercado Livre, Shopee, Amazon, Magalu, e TikTok Shop, com os pedidos chegando ao Bling."
       >
         <div className="orbit-tilt absolute inset-0">
           {/* luz e piso */}
@@ -90,10 +90,10 @@ export function HeroScene() {
             ))}
           </div>
 
-          {/* seis canais em órbita */}
+          {/* cinco canais em órbita */}
           <div className="orbit-spin absolute inset-0">
             {marketplaces.map((m, i) => (
-              <div key={m.id} className="orbit-tile" style={{ ["--a" as string]: `${i * 60 - 90}deg` } as CSSProperties}>
+              <div key={m.id} className="orbit-tile" style={{ ["--a" as string]: `${i * (360 / marketplaces.length) - 90}deg` } as CSSProperties}>
                 <div
                   className="scene-in grid h-full w-full place-items-center rounded-[22%] bg-white p-[18%] shadow-[0_16px_34px_-16px_rgba(12,37,85,0.5)] ring-1 ring-[#dde6f3]"
                   style={{ animationDelay: `${0.5 + i * 0.12}s` }}
@@ -130,8 +130,8 @@ export function HeroScene() {
                   ))}
                 </ul>
                 <div className="mt-2.5 border-t border-[#e3ebf7] pt-2.5">
-                  <p className="text-[10.5px] font-semibold text-slate-600 sm:text-[11.5px]">Publicado em 6 canais</p>
-                  <ul className="mt-1.5 grid grid-cols-6 gap-1">
+                  <p className="text-[10.5px] font-semibold text-slate-600 sm:text-[11.5px]">Publicado em 5 canais</p>
+                  <ul className="mt-1.5 grid grid-cols-5 gap-1">
                     {marketplaces.map((m, i) => (
                       <li key={m.id} className="relative grid aspect-[1.25] place-items-center rounded-lg bg-white p-[5px] ring-1 ring-[#dde6f3]" title={m.name}>
                         <MarketplaceLogo id={m.id} />
@@ -164,7 +164,7 @@ export function HeroScene() {
             Magalu · exemplo
           </Toast>
           <Toast icon={<RefreshCw className="size-4" />} title="Estoque atualizado" className="toast-cycle absolute bottom-0 left-0" style={{ animationDelay: "6s" }}>
-            6 canais
+            5 canais
           </Toast>
         </div>
       </div>

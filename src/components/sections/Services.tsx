@@ -98,7 +98,7 @@ function VisualManage({ on }: { on: boolean }) {
     { icon: BadgePercent, t: "Cupom de 10%", ch: "shopee" as const, st: "Ativo", p: 64, tone: "bg-emerald-50 text-emerald-700" },
     { icon: Tag, t: "Ajuste de preço · 3 produtos", ch: "mercado-livre" as const, st: "Concluído", p: 100, tone: "bg-brand-100 text-electric-600" },
     { icon: Radio, t: "Live de lançamento", ch: "tiktok-shop" as const, st: "Em preparação", p: 40, tone: "bg-amber-50 text-amber-700" },
-    { icon: Megaphone, t: "Campanha de recompra", ch: "ifood" as const, st: "Agendada", p: 15, tone: "bg-slate-100 text-slate-600" },
+    { icon: Megaphone, t: "Campanha de recompra", ch: "magalu" as const, st: "Agendada", p: 15, tone: "bg-slate-100 text-slate-600" },
   ];
   return (
     <div className={`vis flex h-full flex-col gap-4 ${on ? "is-on" : ""}`}>
@@ -106,7 +106,7 @@ function VisualManage({ on }: { on: boolean }) {
       <div className="relative rounded-3xl bg-white p-5 shadow-[0_30px_60px_-34px_rgba(12,37,85,0.5)] ring-1 ring-line">
         <div className="flex items-center justify-between">
           <p className="text-[15px] font-extrabold text-ink">Em andamento</p>
-          <span className="text-[11px] font-semibold text-slate-500">6 canais</span>
+          <span className="text-[11px] font-semibold text-slate-500">5 canais</span>
         </div>
         <ul className="vis-list mt-4 space-y-2.5">
           {actions.map((a) => (
@@ -161,7 +161,7 @@ function VisualIntel({ on }: { on: boolean }) {
     { id: "mercado-livre" as const, v: 42 },
     { id: "shopee" as const, v: 27 },
     { id: "tiktok-shop" as const, v: 18 },
-    { id: "ifood" as const, v: 13 },
+    { id: "amazon" as const, v: 13 },
   ];
   const top = [
     { n: "Kit ferramentas 110 peças", m: 31 },

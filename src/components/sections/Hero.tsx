@@ -24,8 +24,8 @@ export function Hero() {
           </h1>
 
           <p className="mt-6 animate-rise text-[17px] font-medium leading-relaxed text-slate-600 sm:text-[19px]" style={{ animationDelay: "850ms" }}>
-            Criamos seus anúncios, conectamos seu estoque e gerenciamos sua presença no Mercado Livre, Shopee, Amazon, Magalu,
-            TikTok Shop e iFood.
+            Criamos seus anúncios, conectamos seu estoque e gerenciamos sua presença no Mercado Livre, Shopee, Amazon, Magalu
+            e TikTok Shop.
           </p>
           <p className="mt-3 animate-rise text-[17px] font-bold leading-snug text-ink sm:text-lg" style={{ animationDelay: "950ms" }}>
             Você cuida dos produtos e das entregas. Nós cuidamos dos marketplaces.

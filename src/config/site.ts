@@ -3,7 +3,7 @@ export const site = {
   service: "Gestão de Marketplaces",
   title: "Gestão de Marketplaces | DM Empresarial",
   description:
-    "A DM Empresarial estrutura, integra e gerencia a operação da sua empresa no Mercado Livre, Shopee, Amazon, Magalu, TikTok Shop e iFood — da implantação à inteligência de dados.",
+    "A DM Empresarial estrutura, integra e gerencia a operação da sua empresa no Mercado Livre, Shopee, Amazon, Magalu e TikTok Shop — da implantação à inteligência de dados.",
   // Ordem: domínio configurado → domínio de produção da Vercel → localhost (dev)
   url: (
     process.env.NEXT_PUBLIC_SITE_URL ||

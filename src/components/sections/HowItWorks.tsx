@@ -63,7 +63,7 @@ function Mini({ i }: { i: number }) {
           </span>
         </div>
         <p className="mt-3 text-[11px] font-semibold text-slate-600">Publicado em</p>
-        <ul className="stagger mt-1.5 grid grid-cols-6 gap-1.5">
+        <ul className="stagger mt-1.5 grid grid-cols-5 gap-1.5">
           {marketplaces.map((m) => (
             <li key={m.id} className="relative grid aspect-[1.2] place-items-center rounded-lg bg-white p-1 ring-1 ring-line" title={m.name}>
               <MarketplaceLogo id={m.id} />

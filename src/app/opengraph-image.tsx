@@ -34,7 +34,7 @@ export default async function OgImage() {
             Seus produtos em mais marketplaces. Sua empresa com mais oportunidades de vender.
           </div>
           <div style={{ fontSize: 26, color: "#a9bbd6" }}>
-            Mercado Livre · Shopee · Amazon · Magalu · TikTok Shop · iFood
+            Mercado Livre · Shopee · Amazon · Magalu · TikTok Shop
           </div>
         </div>
       </div>

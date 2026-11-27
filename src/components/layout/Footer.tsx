@@ -31,7 +31,7 @@ export function Footer() {
         <div className="mt-12 flex flex-col gap-4 border-t border-line pt-8 text-xs leading-relaxed text-slate-600 lg:flex-row lg:justify-between">
           <p>© {new Date().getFullYear()} DM Empresarial. Todos os direitos reservados.</p>
           <p className="max-w-2xl lg:text-right">
-            Mercado Livre, Shopee, Amazon, Magalu, TikTok Shop, iFood e Bling são marcas de seus respectivos titulares e aparecem apenas
+            Mercado Livre, Shopee, Amazon, Magalu, TikTok Shop e Bling são marcas de seus respectivos titulares e aparecem apenas
             para identificar os canais com que trabalhamos. Gráficos e números exibidos nesta página são demonstrativos e
             não representam resultados de clientes.
           </p>
